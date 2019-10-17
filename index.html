@@ -152,6 +152,316 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="“w-人脸识别" class="article article-type-“w  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/17/人脸识别/">人脸识别</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/17/人脸识别/" class="archive-article-date">
+  	<time datetime="2019-10-17T06:03:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>借鉴别人的代码，首先，获取自己的图片信息，利用dlib切分成只有脸部信息的64*64的小图片。代码get_my_faces.py：</p>
+<p>import cv2<br>import dlib<br>import os<br>import sys<br>import random</p>
+<p>output_dir = ‘./my_faces’<br>size = 64</p>
+<p>if not os.path.exists(output_dir):<br>    os.makedirs(output_dir)</p>
+<h1 id="改变图片的亮度与对比度"><a href="#改变图片的亮度与对比度" class="headerlink" title="改变图片的亮度与对比度"></a>改变图片的亮度与对比度</h1><p>def relight(img, light=1, bias=0):<br>    w = img.shape[1]<br>    h = img.shape[0]<br>    #image = []<br>    for i in range(0,w):<br>        for j in range(0,h):<br>            for c in range(3):<br>                tmp = int(img[j,i,c]*light + bias)<br>                if tmp &gt; 255:<br>                    tmp = 255<br>                elif tmp &lt; 0:<br>                    tmp = 0<br>                img[j,i,c] = tmp<br>    return img</p>
+<p>#使用dlib自带的frontal_face_detector作为我们的特征提取器<br>detector = dlib.get_frontal_face_detector()</p>
+<h1 id="打开摄像头-参数为输入流，可以为摄像头或视频文件"><a href="#打开摄像头-参数为输入流，可以为摄像头或视频文件" class="headerlink" title="打开摄像头 参数为输入流，可以为摄像头或视频文件"></a>打开摄像头 参数为输入流，可以为摄像头或视频文件</h1><p>camera = cv2.VideoCapture(0)</p>
+<p>index = 6641<br>while True:<br>    if (index &lt;= 10000):<br>        print(‘Being processed picture %s’ % index)<br>        # 从摄像头读取照片<br>        success, img = camera.read()<br>        # 转为灰度图片<br>        gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)<br>        # 使用detector进行人脸检测<br>        dets = detector(gray_img, 1)</p>
+<pre><code>    for i, d in enumerate(dets):
+        x1 = d.top() if d.top() &gt; 0 else 0
+        y1 = d.bottom() if d.bottom() &gt; 0 else 0
+        x2 = d.left() if d.left() &gt; 0 else 0
+        y2 = d.right() if d.right() &gt; 0 else 0
+
+        face = img[x1:y1,x2:y2]
+        # 调整图片的对比度与亮度， 对比度与亮度值都取随机数，这样能增加样本的多样性
+        face = relight(face, random.uniform(0.5, 1.5), random.randint(-50, 50))
+
+        face = cv2.resize(face, (size,size))
+
+        cv2.imshow(&apos;image&apos;, face)
+
+        cv2.imwrite(output_dir+&apos;/&apos;+str(index)+&apos;.jpg&apos;, face)
+
+        index += 1
+    key = cv2.waitKey(1) &amp; 0xff
+
+    if key == 27:
+        break
+else:
+    print(&apos;Finished!&apos;)
+    break</code></pre><p>接下来获取人脸小数据集，lfw，生成人脸小图片：代码如下：</p>
+<h1 id="codeing-utf-8"><a href="#codeing-utf-8" class="headerlink" title="-- codeing: utf-8 --"></a>-<em>- codeing: utf-8 -</em>-</h1><p>import sys<br>import os<br>import cv2<br>import dlib</p>
+<p>input_dir = ‘./input_img’<br>output_dir = ‘./other_faces’<br>size = 64</p>
+<p>if not os.path.exists(output_dir):<br>    os.makedirs(output_dir)</p>
+<p>#使用dlib自带的frontal_face_detector作为我们的特征提取器<br>detector = dlib.get_frontal_face_detector()</p>
+<p>index = 1<br>for (path, dirnames, filenames) in os.walk(input_dir):<br>    for filename in filenames:<br>        if filename.endswith(‘.jpg’):<br>            print(‘Being processed picture %s’ % index)<br>            img_path = path+’/‘+filename<br>            # 从文件读取图片<br>            img = cv2.imread(img_path)<br>            # 转为灰度图片<br>            gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)<br>            # 使用detector进行人脸检测 dets为返回的结果<br>            dets = detector(gray_img, 1)</p>
+<pre><code>#使用enumerate 函数遍历序列中的元素以及它们的下标
+#下标i即为人脸序号
+#left：人脸左边距离图片左边界的距离 ；right：人脸右边距离图片左边界的距离 
+#top：人脸上边距离图片上边界的距离 ；bottom：人脸下边距离图片上边界的距离
+for i, d in enumerate(dets):
+    x1 = d.top() if d.top() &gt; 0 else 0
+    y1 = d.bottom() if d.bottom() &gt; 0 else 0
+    x2 = d.left() if d.left() &gt; 0 else 0
+    y2 = d.right() if d.right() &gt; 0 else 0
+    # img[y:y+h,x:x+w]
+    face = img[x1:y1,x2:y2]
+    # 调整图片的尺寸
+    face = cv2.resize(face, (size,size))
+    cv2.imshow(&apos;image&apos;,face)
+    # 保存图片
+    cv2.imwrite(output_dir+&apos;/&apos;+str(index)+&apos;.jpg&apos;, face)
+    index += 1
+
+key = cv2.waitKey(30) &amp; 0xff
+if key == 27:
+    sys.exit(0)</code></pre><p>最后，进行训练，其实我看了源码，实则是一个类似于二分类器的东西，代码如下：</p>
+<p>import tensorflow as tf<br>import cv2<br>import numpy as np<br>import os<br>import random<br>import sys<br>from sklearn.model_selection import train_test_split</p>
+<p>my_faces_path = ‘./my_faces’<br>other_faces_path = ‘./other_faces’<br>size = 64</p>
+<p>imgs = []<br>labs = []</p>
+<p>def getPaddingSize(img):<br>    h, w, _ = img.shape<br>    top, bottom, left, right = (0,0,0,0)<br>    longest = max(h, w)</p>
+<pre><code>if w &lt; longest:
+    tmp = longest - w
+    # //表示整除符号
+    left = tmp // 2
+    right = tmp - left
+elif h &lt; longest:
+    tmp = longest - h
+    top = tmp // 2
+    bottom = tmp - top
+else:
+    pass
+return top, bottom, left, right</code></pre><p>def readData(path , h=size, w=size):<br>    for filename in os.listdir(path):<br>        if filename.endswith(‘.jpg’):<br>            filename = path + ‘/‘ + filename</p>
+<pre><code>img = cv2.imread(filename)
+
+top,bottom,left,right = getPaddingSize(img)
+# 将图片放大， 扩充图片边缘部分
+img = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=[0,0,0])
+img = cv2.resize(img, (h, w))
+#print (labs)
+
+imgs.append(img)
+labs.append(path)</code></pre><p>readData(my_faces_path)<br>readData(other_faces_path)</p>
+<h1 id="将图片数据与标签转换成数组"><a href="#将图片数据与标签转换成数组" class="headerlink" title="将图片数据与标签转换成数组"></a>将图片数据与标签转换成数组</h1><p>imgs = np.array(imgs)<br>labs = np.array([[0,1] if lab == my_faces_path else [1,0] for lab in labs])</p>
+<h1 id="随机划分测试集与训练集"><a href="#随机划分测试集与训练集" class="headerlink" title="随机划分测试集与训练集"></a>随机划分测试集与训练集</h1><p>train_x,test_x,train_y,test_y = train_test_split(imgs, labs, test_size=0.05, random_state=random.randint(0,100))</p>
+<h1 id="参数：图片数据的总数，图片的高、宽、通道"><a href="#参数：图片数据的总数，图片的高、宽、通道" class="headerlink" title="参数：图片数据的总数，图片的高、宽、通道"></a>参数：图片数据的总数，图片的高、宽、通道</h1><p>train_x = train_x.reshape(train_x.shape[0], size, size, 3)<br>test_x = test_x.reshape(test_x.shape[0], size, size, 3)</p>
+<h1 id="将数据转换成小于1的数"><a href="#将数据转换成小于1的数" class="headerlink" title="将数据转换成小于1的数"></a>将数据转换成小于1的数</h1><p>train_x = train_x.astype(‘float32’)/255.0<br>test_x = test_x.astype(‘float32’)/255.0<br>#print (test_x)<br>print(‘train size:%s, test size:%s’ % (len(train_x), len(test_x)))</p>
+<h1 id="图片块，每次取100张图片"><a href="#图片块，每次取100张图片" class="headerlink" title="图片块，每次取100张图片"></a>图片块，每次取100张图片</h1><p>batch_size = 100<br>num_batch = len(train_x) // batch_size</p>
+<p>x = tf.placeholder(tf.float32, [None, size, size, 3])<br>y_ = tf.placeholder(tf.float32, [None, 2])</p>
+<p>keep_prob_5 = tf.placeholder(tf.float32)<br>keep_prob_75 = tf.placeholder(tf.float32)</p>
+<p>def weightVariable(shape):<br>    init = tf.random_normal(shape, stddev=0.01)<br>    return tf.Variable(init)</p>
+<p>def biasVariable(shape):<br>    init = tf.random_normal(shape)<br>    return tf.Variable(init)</p>
+<p>def conv2d(x, W):<br>    return tf.nn.conv2d(x, W, strides=[1,1,1,1], padding=’SAME’)</p>
+<p>def maxPool(x):<br>    return tf.nn.max_pool(x, ksize=[1,2,2,1], strides=[1,2,2,1], padding=’SAME’)</p>
+<p>def dropout(x, keep):<br>    return tf.nn.dropout(x, keep)</p>
+<p>def cnnLayer():<br>    # 第一层<br>    W1 = weightVariable([3,3,3,32]) # 卷积核大小(3,3)， 输入通道(3)， 输出通道(32)<br>    b1 = biasVariable([32])<br>    # 卷积<br>    conv1 = tf.nn.relu(conv2d(x, W1) + b1)<br>    # 池化<br>    pool1 = maxPool(conv1)<br>    # 减少过拟合，随机让某些权重不更新<br>    drop1 = dropout(pool1, keep_prob_5)</p>
+<pre><code># 第二层
+W2 = weightVariable([3,3,32,64])
+b2 = biasVariable([64])
+conv2 = tf.nn.relu(conv2d(drop1, W2) + b2)
+pool2 = maxPool(conv2)
+drop2 = dropout(pool2, keep_prob_5)
+
+# 第三层
+W3 = weightVariable([3,3,64,64])
+b3 = biasVariable([64])
+conv3 = tf.nn.relu(conv2d(drop2, W3) + b3)
+pool3 = maxPool(conv3)
+drop3 = dropout(pool3, keep_prob_5)
+
+# 全连接层
+Wf = weightVariable([8*8*64, 512])
+bf = biasVariable([512])
+drop3_flat = tf.reshape(drop3, [-1, 8*8*64])
+dense = tf.nn.relu(tf.matmul(drop3_flat, Wf) + bf)
+dropf = dropout(dense, keep_prob_75)
+
+# 输出层
+Wout = weightVariable([512,2])
+bout = biasVariable([2])
+#out = tf.matmul(dropf, Wout) + bout
+out = tf.add(tf.matmul(dropf, Wout), bout)
+return out</code></pre><p>def cnnTrain():<br>    out = cnnLayer()</p>
+<pre><code>cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=out, labels=y_))
+
+train_step = tf.train.AdamOptimizer(0.01).minimize(cross_entropy)
+# 比较标签是否相等，再求的所有数的平均值，tf.cast(强制转换类型)
+accuracy = tf.reduce_mean(tf.cast(tf.equal(tf.argmax(out, 1), tf.argmax(y_, 1)), tf.float32))
+# 将loss与accuracy保存以供tensorboard使用
+tf.summary.scalar(&apos;loss&apos;, cross_entropy)
+tf.summary.scalar(&apos;accuracy&apos;, accuracy)
+merged_summary_op = tf.summary.merge_all()
+# 数据保存器的初始化
+saver = tf.train.Saver()
+
+with tf.Session() as sess:
+
+    sess.run(tf.global_variables_initializer())
+
+    summary_writer = tf.summary.FileWriter(&apos;./tmp&apos;, graph=tf.get_default_graph())
+
+    for n in range(10):
+         # 每次取128(batch_size)张图片
+        for i in range(num_batch):
+            batch_x = train_x[i*batch_size : (i+1)*batch_size]
+            batch_y = train_y[i*batch_size : (i+1)*batch_size]
+            # 开始训练数据，同时训练三个变量，返回三个数据
+            _,loss,summary = sess.run([train_step, cross_entropy, merged_summary_op],
+                                       feed_dict={x:batch_x,y_:batch_y, keep_prob_5:0.5,keep_prob_75:0.75})
+            summary_writer.add_summary(summary, n*num_batch+i)
+            # 打印损失
+            print(n*num_batch+i, loss)
+
+            if (n*num_batch+i) % 100 == 0:
+                # 获取测试数据的准确率
+                acc = accuracy.eval({x:test_x, y_:test_y, keep_prob_5:1.0, keep_prob_75:1.0})
+                print(n*num_batch+i, acc)
+                # 准确率大于0.98时保存并退出
+                if acc &gt; 0.98 and n &gt; 2:
+                    saver.save(sess, &apos;./train_faces.model&apos;, global_step=n*num_batch+i)
+                    sys.exit(0)
+    print(&apos;accuracy less 0.98, exited!&apos;)</code></pre><p>cnnTrain()<br>最后，可以打开摄像头检测是否识别成功，代码如下：</p>
+<p>import tensorflow as tf<br>import cv2<br>import dlib<br>import numpy as np<br>import os<br>import random<br>import sys<br>from sklearn.model_selection import train_test_split</p>
+<p>my_faces_path = ‘./my_faces’<br>other_faces_path = ‘./other_faces’<br>size = 64</p>
+<p>imgs = []<br>labs = []</p>
+<p>def getPaddingSize(img):<br>    h, w, _ = img.shape<br>    top, bottom, left, right = (0,0,0,0)<br>    longest = max(h, w)</p>
+<pre><code>if w &lt; longest:
+    tmp = longest - w
+    # //表示整除符号
+    left = tmp // 2
+    right = tmp - left
+elif h &lt; longest:
+    tmp = longest - h
+    top = tmp // 2
+    bottom = tmp - top
+else:
+    pass
+return top, bottom, left, right</code></pre><p>def readData(path , h=size, w=size):<br>    for filename in os.listdir(path):<br>        if filename.endswith(‘.jpg’):<br>            filename = path + ‘/‘ + filename</p>
+<pre><code>img = cv2.imread(filename)
+
+top,bottom,left,right = getPaddingSize(img)
+# 将图片放大， 扩充图片边缘部分
+img = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=[0,0,0])
+img = cv2.resize(img, (h, w))
+
+imgs.append(img)
+labs.append(path)</code></pre><p>readData(my_faces_path)<br>readData(other_faces_path)</p>
+<h1 id="将图片数据与标签转换成数组-1"><a href="#将图片数据与标签转换成数组-1" class="headerlink" title="将图片数据与标签转换成数组"></a>将图片数据与标签转换成数组</h1><p>imgs = np.array(imgs)<br>labs = np.array([[0,1] if lab == my_faces_path else [1,0] for lab in labs])</p>
+<h1 id="随机划分测试集与训练集-1"><a href="#随机划分测试集与训练集-1" class="headerlink" title="随机划分测试集与训练集"></a>随机划分测试集与训练集</h1><p>train_x,test_x,train_y,test_y = train_test_split(imgs, labs, test_size=0.05, random_state=random.randint(0,100))</p>
+<h1 id="参数：图片数据的总数，图片的高、宽、通道-1"><a href="#参数：图片数据的总数，图片的高、宽、通道-1" class="headerlink" title="参数：图片数据的总数，图片的高、宽、通道"></a>参数：图片数据的总数，图片的高、宽、通道</h1><p>train_x = train_x.reshape(train_x.shape[0], size, size, 3)<br>test_x = test_x.reshape(test_x.shape[0], size, size, 3)</p>
+<h1 id="将数据转换成小于1的数-1"><a href="#将数据转换成小于1的数-1" class="headerlink" title="将数据转换成小于1的数"></a>将数据转换成小于1的数</h1><p>train_x = train_x.astype(‘float32’)/255.0<br>test_x = test_x.astype(‘float32’)/255.0</p>
+<p>print(‘train size:%s, test size:%s’ % (len(train_x), len(test_x)))</p>
+<h1 id="图片块，每次取128张图片"><a href="#图片块，每次取128张图片" class="headerlink" title="图片块，每次取128张图片"></a>图片块，每次取128张图片</h1><p>batch_size = 128<br>num_batch = len(train_x) // 128</p>
+<p>x = tf.placeholder(tf.float32, [None, size, size, 3])<br>y_ = tf.placeholder(tf.float32, [None, 2])</p>
+<p>keep_prob_5 = tf.placeholder(tf.float32)<br>keep_prob_75 = tf.placeholder(tf.float32)</p>
+<p>def weightVariable(shape):<br>    init = tf.random_normal(shape, stddev=0.01)<br>    return tf.Variable(init)</p>
+<p>def biasVariable(shape):<br>    init = tf.random_normal(shape)<br>    return tf.Variable(init)</p>
+<p>def conv2d(x, W):<br>    return tf.nn.conv2d(x, W, strides=[1,1,1,1], padding=’SAME’)</p>
+<p>def maxPool(x):<br>    return tf.nn.max_pool(x, ksize=[1,2,2,1], strides=[1,2,2,1], padding=’SAME’)</p>
+<p>def dropout(x, keep):<br>    return tf.nn.dropout(x, keep)</p>
+<p>def cnnLayer():<br>    # 第一层<br>    W1 = weightVariable([3,3,3,32]) # 卷积核大小(3,3)， 输入通道(3)， 输出通道(32)<br>    b1 = biasVariable([32])<br>    # 卷积<br>    conv1 = tf.nn.relu(conv2d(x, W1) + b1)<br>    # 池化<br>    pool1 = maxPool(conv1)<br>    # 减少过拟合，随机让某些权重不更新<br>    drop1 = dropout(pool1, keep_prob_5)</p>
+<pre><code># 第二层
+W2 = weightVariable([3,3,32,64])
+b2 = biasVariable([64])
+conv2 = tf.nn.relu(conv2d(drop1, W2) + b2)
+pool2 = maxPool(conv2)
+drop2 = dropout(pool2, keep_prob_5)
+
+# 第三层
+W3 = weightVariable([3,3,64,64])
+b3 = biasVariable([64])
+conv3 = tf.nn.relu(conv2d(drop2, W3) + b3)
+pool3 = maxPool(conv3)
+drop3 = dropout(pool3, keep_prob_5)
+
+# 全连接层
+Wf = weightVariable([8*16*32, 512])
+bf = biasVariable([512])
+drop3_flat = tf.reshape(drop3, [-1, 8*16*32])
+dense = tf.nn.relu(tf.matmul(drop3_flat, Wf) + bf)
+dropf = dropout(dense, keep_prob_75)
+
+# 输出层
+Wout = weightVariable([512,2])
+bout = biasVariable([2])
+out = tf.add(tf.matmul(dropf, Wout), bout)
+return out</code></pre><p>output = cnnLayer()<br>predict = tf.argmax(output, 1)  </p>
+<p>saver = tf.train.Saver()<br>sess = tf.Session()<br>saver.restore(sess, tf.train.latest_checkpoint(‘.’))  </p>
+<p>def is_my_face(image):<br>    res = sess.run(predict, feed_dict={x: [image/255.0], keep_prob_5:1.0, keep_prob_75: 1.0})<br>    if res[0] == 1:<br>        return True<br>    else:<br>        return False  </p>
+<p>#使用dlib自带的frontal_face_detector作为我们的特征提取器<br>detector = dlib.get_frontal_face_detector()</p>
+<p>cam = cv2.VideoCapture(0)  </p>
+<p>while True:<br>    _, img = cam.read()<br>    gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)<br>    dets = detector(gray_image, 1)<br>    if not len(dets):<br>        #print(‘Can`t get face.’)<br>        cv2.imshow(‘img’, img)<br>        key = cv2.waitKey(30) &amp; 0xff<br>        if key == 27:<br>            sys.exit(0)</p>
+<pre><code>for i, d in enumerate(dets):
+    x1 = d.top() if d.top() &gt; 0 else 0
+    y1 = d.bottom() if d.bottom() &gt; 0 else 0
+    x2 = d.left() if d.left() &gt; 0 else 0
+    y2 = d.right() if d.right() &gt; 0 else 0
+    face = img[x1:y1,x2:y2]
+    # 调整图片的尺寸
+    face = cv2.resize(face, (size,size))
+    print(&apos;Is this my face? %s&apos; % is_my_face(face))
+
+    cv2.rectangle(img, (x2,x1),(y2,y1), (255,0,0),3)
+    cv2.imshow(&apos;image&apos;,img)
+    key = cv2.waitKey(30) &amp; 0xff
+    if key == 27:
+        sys.exit(0)</code></pre><p>sess.close()</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/17/人脸识别/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="w-这是个总结" class="article article-type-w  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
