@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>“人脸识别部分项目” | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="function getMedia() {        $(“#mainDiv”).empty();        let videoComp &#x3D; “ “;        $(“#mainDiv”).append(videoComp);     let constraints &#x3D; &amp;#123;         video: &amp;#123;width: 500, height: 500&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="“人脸识别部分项目”">
+<meta property="og:url" content="http://example.com/2021/10/31/%E2%80%9C%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E9%83%A8%E5%88%86%E9%A1%B9%E7%9B%AE%E2%80%9D/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="function getMedia() {        $(“#mainDiv”).empty();        let videoComp &#x3D; “ “;        $(“#mainDiv”).append(videoComp);     let constraints &#x3D; &amp;#123;         video: &amp;#123;width: 500, height: 500&amp;#125;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-10-31T07:17:21.000Z">
+<meta property="article:modified_time" content="2021-10-31T07:31:44.004Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/10/31/%E2%80%9C%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E9%83%A8%E5%88%86%E9%A1%B9%E7%9B%AE%E2%80%9D/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '“人脸识别部分项目”',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-10-31 15:31:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">“人脸识别部分项目”</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-10-31T07:17:21.000Z" title="Created 2021-10-31 15:17:21">2021-10-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-10-31T07:31:44.004Z" title="Updated 2021-10-31 15:31:44">2021-10-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="“人脸识别部分项目”"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p> function getMedia() {<br>        $(“#mainDiv”).empty();<br>        let videoComp = “ <video id='video' width='500px' height='500px' autoplay='autoplay' style='margin-top: 20px'></video><canvas id='canvas' width='500px' height='500px' style='display: none'></canvas>“;<br>        $(“#mainDiv”).append(videoComp);</p>
+<pre><code>    let constraints = &#123;
+        video: &#123;width: 500, height: 500&#125;,
+        audio: true
+    &#125;;
+    //获得video摄像头区域
+    let video = document.getElementById(&quot;video&quot;);
+    //这里介绍新的方法，返回一个 Promise对象
+    // 这个Promise对象返回成功后的回调函数带一个 MediaStream 对象作为其参数
+    // then()是Promise对象里的方法
+    // then()方法是异步执行，当then()前的方法执行完后再执行then()内部的程序
+    // 避免数据没有获取到
+    let promise = navigator.mediaDevices.getUserMedia(constraints);
+    promise.then(function (MediaStream) &#123;
+        video.srcObject = MediaStream;
+        video.play();
+    &#125;);
+
+    // var t1 = window.setTimeout(function() &#123;
+    //     takePhoto();
+    // &#125;,2000)
+&#125;
+</code></pre>
+<p>//拍照事件<br>    function takePhoto() {<br>        let mainComp = $(“#mainDiv”);<br>        if(mainComp.has(‘video’).length)<br>        {<br>            let userNameInput = $(“#userName”).val();<br>            if(userNameInput == “”)<br>            {<br>                alert(“姓名不能为空!”);<br>                return false;<br>            }<br>            //获得Canvas对象<br>            let video = document.getElementById(“video”);<br>            let canvas = document.getElementById(“canvas”);<br>            let ctx = canvas.getContext(‘2d’);<br>            ctx.drawImage(video, 0, 0, 500, 500);<br>            var formData = new FormData();<br>            var base64File = canvas.toDataURL();<br>            var userName = $(“#userName”).val();<br>            formData.append(“file”, base64File);<br>            formData.append(“name”, userName);<br>            formData.append(“groupId”, “101”);<br>            $.ajax({<br>                type: “post”,<br>                url: “/faceAdd”,<br>                data: formData,<br>                contentType: false,<br>                processData: false,<br>                async: false,<br>                success: function (text) {<br>                    var res = JSON.stringify(text)<br>                    if (text.code == 0) {<br>                        alert(“注册成功”)<br>                    } else {<br>                        alert(text.message)<br>                    }<br>                },<br>                error: function (error) {<br>                    alert(JSON.stringify(error))<br>                }<br>            });<br>        }<br>        else{<br>            var formData = new FormData();<br>            let userName = $(“#userName”).val();<br>            formData.append(“groupId”, “101”);<br>            var file = $(“#file0”)[0].files[0];<br>            var reader = new FileReader();<br>            reader.readAsDataURL(file);<br>            reader.onload = function () {<br>            var base64 = reader.result;<br>            formData.append(“file”, base64);<br>            formData.append(“name”,userName);<br>                $.ajax({<br>                    type: “post”,<br>                    url: “/faceAdd”,<br>                    data: formData,<br>                    contentType: false,<br>                    processData: false,<br>                    async: false,<br>                    success: function (text) {<br>                        var res = JSON.stringify(text)<br>                        if (text.code == 0) {<br>                            alert(“注册成功”)<br>                        } else {<br>                            alert(text.message)<br>                        }<br>                    },<br>                    error: function (error) {<br>                        alert(JSON.stringify(error))<br>                    }<br>                });<br>                location.reload();<br>            }<br>        }</p>
+<pre><code>&#125;
+</code></pre>
+<p>2、后台解析图片，提取人像特征</p>
+<p>后台解析前端传过来的图片，提取人像特征存入数据库，人像特征的提取主要是靠FaceEngine引擎，顺着源码一路看下去，自己才疏学浅实在是没懂具体是个什么样的算法。</p>
+<p> /*<br>    人脸添加<br>     */<br>    @RequestMapping(value = “/faceAdd”, method = RequestMethod.POST)<br>    @ResponseBody<br>    public Result<Object> faceAdd(@RequestParam(“file”) String file, @RequestParam(“groupId”) Integer groupId, @RequestParam(“name”) String name) {</p>
+<pre><code>    try &#123;
+
+        //解析图片
+        byte[] decode = Base64.decode(base64Process(file));
+        ImageInfo imageInfo = ImageFactory.getRGBData(decode);
+
+        //人脸特征获取
+        byte[] bytes = faceEngineService.extractFaceFeature(imageInfo);
+        if (bytes == null) &#123;
+            return Results.newFailedResult(ErrorCodeEnum.NO_FACE_DETECTED);
+        &#125;
+
+        UserFaceInfo userFaceInfo = new UserFaceInfo();
+        userFaceInfo.setName(name);
+        userFaceInfo.setGroupId(groupId);
+        userFaceInfo.setFaceFeature(bytes);
+        userFaceInfo.setFaceId(RandomUtil.randomString(10));
+
+        //人脸特征插入到数据库
+        userFaceInfoService.insertSelective(userFaceInfo);
+
+        logger.info(&quot;faceAdd:&quot; + name);
+        return Results.newSuccessResult(&quot;&quot;);
+    &#125; catch (Exception e) &#123;
+        logger.error(&quot;&quot;, e);
+    &#125;
+    return Results.newFailedResult(ErrorCodeEnum.UNKNOWN);
+&#125;
+</code></pre>
+<p>3、人像特征对比</p>
+<p>人脸识别：将前端传入的图像经过人像特征提取后，和库中已存在的人像信息对比分析</p>
+<p>/*<br>    人脸识别<br>     */<br>    @RequestMapping(value = “/faceSearch”, method = RequestMethod.POST)<br>    @ResponseBody<br>    public Result<FaceSearchResDto> faceSearch(String file, Integer groupId) throws Exception {<br>        byte[] decode = Base64.decode(base64Process(file));<br>        BufferedImage bufImage = ImageIO.read(new ByteArrayInputStream(decode));<br>        ImageInfo imageInfo = ImageFactory.bufferedImage2ImageInfo(bufImage);</p>
+<pre><code>    //人脸特征获取
+    byte[] bytes = faceEngineService.extractFaceFeature(imageInfo);
+    if (bytes == null) &#123;
+        return Results.newFailedResult(ErrorCodeEnum.NO_FACE_DETECTED);
+    &#125;
+    //人脸比对，获取比对结果
+    List&lt;FaceUserInfo&gt; userFaceInfoList = faceEngineService.compareFaceFeature(bytes, groupId);
+
+    if (CollectionUtil.isNotEmpty(userFaceInfoList)) &#123;
+        FaceUserInfo faceUserInfo = userFaceInfoList.get(0);
+        FaceSearchResDto faceSearchResDto = new FaceSearchResDto();
+        BeanUtil.copyProperties(faceUserInfo, faceSearchResDto);
+        List&lt;ProcessInfo&gt; processInfoList = faceEngineService.process(imageInfo);
+        if (CollectionUtil.isNotEmpty(processInfoList)) &#123;
+            //人脸检测
+            List&lt;FaceInfo&gt; faceInfoList = faceEngineService.detectFaces(imageInfo);
+            int left = faceInfoList.get(0).getRect().getLeft();
+            int top = faceInfoList.get(0).getRect().getTop();
+            int width = faceInfoList.get(0).getRect().getRight() - left;
+            int height = faceInfoList.get(0).getRect().getBottom() - top;
+
+            Graphics2D graphics2D = bufImage.createGraphics();
+            graphics2D.setColor(Color.RED);//红色
+            BasicStroke stroke = new BasicStroke(5f);
+            graphics2D.setStroke(stroke);
+            graphics2D.drawRect(left, top, width, height);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufImage, &quot;jpg&quot;, outputStream);
+            byte[] bytes1 = outputStream.toByteArray();
+            faceSearchResDto.setImage(&quot;data:image/jpeg;base64,&quot; + Base64Utils.encodeToString(bytes1));
+            faceSearchResDto.setAge(processInfoList.get(0).getAge());
+            faceSearchResDto.setGender(processInfoList.get(0).getGender().equals(1) ? &quot;女&quot; : &quot;男&quot;);
+
+        &#125;
+
+        return Results.newSuccessResult(faceSearchResDto);
+    &#125;
+    return Results.newFailedResult(ErrorCodeEnum.FACE_DOES_NOT_MATCH);
+&#125;
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2021/10/31/%E2%80%9C%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E9%83%A8%E5%88%86%E9%A1%B9%E7%9B%AE%E2%80%9D/">http://example.com/2021/10/31/%E2%80%9C%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E9%83%A8%E5%88%86%E9%A1%B9%E7%9B%AE%E2%80%9D/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/10/28/post-two/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">post two</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/10/31/%E2%80%9C%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E9%83%A8%E5%88%86%E9%A1%B9%E7%9B%AE%E2%80%9D/" title="“人脸识别部分项目”"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="“人脸识别部分项目”"/></a><div class="content"><a class="title" href="/2021/10/31/%E2%80%9C%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E9%83%A8%E5%88%86%E9%A1%B9%E7%9B%AE%E2%80%9D/" title="“人脸识别部分项目”">“人脸识别部分项目”</a><time datetime="2021-10-31T07:17:21.000Z" title="Created 2021-10-31 15:17:21">2021-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/10/28/post-two/" title="post two"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="post two"/></a><div class="content"><a class="title" href="/2021/10/28/post-two/" title="post two">post two</a><time datetime="2021-10-28T11:37:14.000Z" title="Created 2021-10-28 19:37:14">2021-10-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
